@@ -11,6 +11,7 @@ Suggestions and corrections are welcome. This repository is a curated index, so 
 5. Do not guess at project support, maintenance status, license, or compatibility. Link to upstream material for details and note uncertainty where needed; clearly label archived or otherwise inactive projects as historical, not current recommendations.
 6. Treat game-version, loader, and AI-provider details as volatile. Add a review date when a status claim materially affects whether a resource is useful.
 7. Do not add game binaries, dumps, firmware, keys, proprietary assets, credentials, or instructions for bypassing access controls.
+8. Platform notes under `platforms/` are hand-maintained scope summaries. Keep them aligned with the matching row in `ECOSYSTEM_COVERAGE.md`, and do not infer general support from a title-integrated UGC service.
 
 ## Checks
 

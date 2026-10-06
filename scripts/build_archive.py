@@ -23,6 +23,8 @@ BASE_ARCHIVE_FILES = (
     "scripts/build_categories.py",
     "scripts/validate_catalog.py",
     "categories/README.md",
+    "platforms/README.md",
+    "platforms/android/README.md",
 )
 FIXED_ZIP_TIME = (1980, 1, 1, 0, 0, 0)
 

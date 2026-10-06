@@ -43,6 +43,8 @@ TEXT_FILES_TO_CHECK = (
     "scripts/build_categories.py",
     "scripts/validate_catalog.py",
     "categories/README.md",
+    "platforms/README.md",
+    "platforms/android/README.md",
 )
 
 

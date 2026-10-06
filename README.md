@@ -8,6 +8,10 @@ A curated, link-only meta-repository for AI-assisted game modding, coding-agent 
 
 Use the generated [category directory](categories/README.md) for one folder and alphabetized resource page per catalog category. `resources.json` remains the canonical data source; regenerate these pages with `python scripts/build_categories.py`.
 
+## Browse by platform
+
+- [Platform scope notes](platforms/README.md) — includes the narrow Android UGC coverage and explicitly out-of-scope general app-modification workflows.
+
 ## Projects
 
 ### AI coding-agent workflows
@@ -412,6 +416,7 @@ This repository is informational only and is not legal advice. Use only software
 
 - [`resources.json`](resources.json) — canonical machine-readable catalog matching the linked resources above.
 - [`categories/README.md`](categories/README.md) — generated category directory, with one alphabetized resource list per category folder.
+- [`platforms/README.md`](platforms/README.md) — platform-specific scope notes; see [Android](platforms/android/README.md) for the current UGC boundary and general-app exclusions.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — guidelines for suggesting or updating entries.
 - [`ECOSYSTEM_COVERAGE.md`](ECOSYSTEM_COVERAGE.md) — scoped engine/platform checklist, status definitions, and explicit scope/maintenance boundaries.
 - [`scripts/build_categories.py`](scripts/build_categories.py) — regenerates category folders from `resources.json`; generated pages should not be edited directly.

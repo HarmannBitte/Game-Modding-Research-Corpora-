@@ -4,6 +4,10 @@ A curated, link-only meta-repository for AI-assisted game modding, coding-agent 
 
 > **This is an index, not a monorepo.** It links to the original projects; it does not clone, vendor, distribute, or endorse their code or game assets.
 
+## Browse by category
+
+Use the generated [category directory](categories/README.md) for one folder and alphabetized resource page per catalog category. `resources.json` remains the canonical data source; regenerate these pages with `python scripts/build_categories.py`.
+
 ## Projects
 
 ### AI coding-agent workflows
@@ -406,10 +410,12 @@ This repository is informational only and is not legal advice. Use only software
 
 ## Repository contents
 
-- [`resources.json`](resources.json) — machine-readable catalog matching the linked resources above.
+- [`resources.json`](resources.json) — canonical machine-readable catalog matching the linked resources above.
+- [`categories/README.md`](categories/README.md) — generated category directory, with one alphabetized resource list per category folder.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — guidelines for suggesting or updating entries.
 - [`ECOSYSTEM_COVERAGE.md`](ECOSYSTEM_COVERAGE.md) — scoped engine/platform checklist, status definitions, and explicit scope/maintenance boundaries.
-- [`scripts/validate_catalog.py`](scripts/validate_catalog.py) — dependency-free checks for catalog structure, duplicate IDs/URLs, README link parity, whitespace, and checklist dispositions.
+- [`scripts/build_categories.py`](scripts/build_categories.py) — regenerates category folders from `resources.json`; generated pages should not be edited directly.
+- [`scripts/validate_catalog.py`](scripts/validate_catalog.py) — dependency-free checks for catalog structure, duplicate IDs/URLs, README/category-page parity, whitespace, and checklist dispositions.
 - [`scripts/build_archive.py`](scripts/build_archive.py) — deterministic ZIP builder with integrity and byte-for-byte payload checks.
 - [`.github/workflows/validate.yml`](.github/workflows/validate.yml) — runs the validator and archive check on pushes and pull requests.
 

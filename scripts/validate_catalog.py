@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
 from collections import Counter
 from datetime import date
@@ -39,7 +40,9 @@ TEXT_FILES_TO_CHECK = (
     "resources.json",
     ".github/workflows/validate.yml",
     "scripts/build_archive.py",
+    "scripts/build_categories.py",
     "scripts/validate_catalog.py",
+    "categories/README.md",
 )
 
 
@@ -135,6 +138,21 @@ def validate() -> list[str]:
         errors.append(f"README.md does not link to catalog URL: {url}")
 
     try:
+        category_check = subprocess.run(
+            [sys.executable, str(ROOT / "scripts/build_categories.py"), "--check"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except OSError as exc:
+        errors.append(f"could not validate generated category pages: {exc}")
+    else:
+        if category_check.returncode:
+            details = (category_check.stderr or category_check.stdout).strip()
+            errors.append(f"generated category pages are out of date: {details}")
+
+    try:
         coverage = COVERAGE_PATH.read_text(encoding="utf-8")
     except OSError as exc:
         errors.append(f"cannot read ECOSYSTEM_COVERAGE.md: {exc}")
@@ -178,8 +196,12 @@ def validate() -> list[str]:
                 f"expected {EXPECTED_CROSSWALK_COUNTS}"
             )
 
-    for relative_path in TEXT_FILES_TO_CHECK:
-        path = ROOT / relative_path
+    text_paths = {ROOT / relative for relative in TEXT_FILES_TO_CHECK}
+    category_root = ROOT / "categories"
+    if category_root.exists():
+        text_paths.update(path for path in category_root.rglob("README.md") if path.is_file())
+    for path in sorted(text_paths, key=lambda item: item.relative_to(ROOT).as_posix()):
+        relative_path = path.relative_to(ROOT).as_posix()
         if not path.is_file():
             errors.append(f"expected project file is missing: {relative_path}")
             continue
@@ -210,8 +232,8 @@ def main() -> int:
     categories = {resource["category"] for resource in resources}
     print(
         f"Catalog validation passed: {len(resources)} records, "
-        f"{len(categories)} categories, unique IDs/URLs, README parity, "
-        f"and {EXPECTED_CROSSWALK_ROWS} closed crosswalk rows "
+        f"{len(categories)} categories, unique IDs/URLs, README URL parity, "
+        f"generated category-page parity, and {EXPECTED_CROSSWALK_ROWS} closed crosswalk rows "
         "(6 Covered / 12 Partial / 0 Open)."
     )
     return 0
